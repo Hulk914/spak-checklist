@@ -70,6 +70,9 @@ export class AppComponent implements OnInit {
 
   deleteTask(index) {
     this.listFormArray.removeAt(index);
+    if (this.selectedTask !== null && this.selectedTask !== undefined) {
+      this.cancelUpdate();
+    }
   }
 
   completeTask(index) {
