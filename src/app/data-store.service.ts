@@ -8,7 +8,7 @@ export class DataStoreService {
   // real scenario this would come for logged in user from api
   userLists: { [key: string]: listItem[] } = {
     defaultUser: [
-      { isCompleted: true, content: 'JIRA-1234' },
+      { isCompleted: false, content: 'JIRA-1234' },
       { isCompleted: true, content: 'JIRA-124' },
       { isCompleted: true, content: 'JIRA-1344' },
       { isCompleted: true, content: 'JIRA-546' },

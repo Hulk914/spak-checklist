@@ -20,25 +20,32 @@
         Cancel
       </button>
     </div>
-    <section
-      formArrayName="lists"
-      class="list-item"
-      *ngFor="let item of listFormArray.controls; let i = index"
-      (click)="selectTask(i)"
-    >
-      <ng-container [formGroupName]="i">
-        <input
-          type="checkbox"
-          class="checkbox"
-          [id]="i"
-          formControlName="isCompleted"
-          (click)="$event.stopPropagation(); completeTask(i)"
-        />
-        <div>
-          {{ item.value.content }}
-        </div>
-        <div (click)="$event.stopPropagation(); deleteTask(i)" class="delete">X</div>
-      </ng-container>
-    </section>
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+      <section
+        formArrayName="lists"
+        class="list-item"
+        *ngFor="let item of listFormArray.controls; let i = index"
+        (click)="selectTask(i)"
+        cdkDrag
+        [cdkDragDisabled]="item.value.isCompleted"
+      >
+        <div *cdkDragPreview>{{ item.value.content }}</div>
+        <ng-container [formGroupName]="i">
+          <input
+            type="checkbox"
+            class="checkbox"
+            [id]="i"
+            formControlName="isCompleted"
+            (click)="$event.stopPropagation(); completeTask(i)"
+          />
+          <div>
+            {{ item.value.content }}
+          </div>
+          <div (click)="$event.stopPropagation(); deleteTask(i)" class="delete">
+            X
+          </div>
+        </ng-container>
+      </section>
+    </div>
   </form>
 </div>

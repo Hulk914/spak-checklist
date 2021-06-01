@@ -2,6 +2,17 @@ $header-color: #05386b;
 $container-color: #379683;
 $active-item-color: #8ee4af;
 
+@mixin list-item {
+  padding: 1rem;
+  background-color: $active-item-color;
+  color: $header-color;
+  margin-top: 1rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -37,16 +48,7 @@ $active-item-color: #8ee4af;
     }
 
     .list-item {
-      //   text-align: center;
-      padding: 1rem;
-      background-color: $active-item-color;
-      color: $header-color;
-      margin-top: 1rem;
-      font-weight: bolder;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
+      @include list-item();
       .checkbox {
         height: 2rem;
         width: 2rem;
@@ -54,12 +56,18 @@ $active-item-color: #8ee4af;
       }
 
       .delete {
-          color: red;
-          cursor: pointer;
-          font-size: 2rem;
-        //   border: 1px solid red;
-        //   text-align: center;
+        color: red;
+        cursor: pointer;
+        font-size: 2rem;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   }
 }

@@ -1,7 +1,8 @@
 import { listItem } from './listItem';
 import { DataStoreService } from './data-store.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.checkList = this._dStore.getListForCurrentUser();
-    this.checkList.sort((a, b) => (a && !b ? 1 : -1));
+    this.checkList.sort((a, b) => (a.isCompleted && !b.isCompleted ? 1 : -1));
     this.checkListGroup = this.fb.group({
       inputCtrl: this.fb.control(''),
       lists: this.fb.array(this.checkList.map((list) => this.createList(list))),
@@ -90,5 +91,17 @@ export class AppComponent implements OnInit {
         })
       );
     }
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    const movingTask = this.listFormArray.get(event.previousIndex.toString());
+    const destinationTask = this.listFormArray.get(
+      event.currentIndex.toString()
+    );
+    if (destinationTask.value.isCompleted) {
+      return;
+    }
+    this.listFormArray.removeAt(event.previousIndex);
+    this.listFormArray.insert(event.currentIndex, movingTask);
   }
 }
