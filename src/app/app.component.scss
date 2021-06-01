@@ -1,0 +1,65 @@
+$header-color: #05386b;
+$container-color: #379683;
+$active-item-color: #8ee4af;
+
+.container {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+
+  .list-container {
+    border-radius: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 1rem;
+    height: fit-content;
+    background-color: $container-color;
+
+    .header {
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+      color: white;
+      background-color: $header-color;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        width: 50%;
+      }
+    }
+
+    .list-item {
+      //   text-align: center;
+      padding: 1rem;
+      background-color: $active-item-color;
+      color: $header-color;
+      margin-top: 1rem;
+      font-weight: bolder;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .checkbox {
+        height: 2rem;
+        width: 2rem;
+        cursor: pointer;
+      }
+
+      .delete {
+          color: red;
+          cursor: pointer;
+          font-size: 2rem;
+        //   border: 1px solid red;
+        //   text-align: center;
+      }
+    }
+  }
+}
